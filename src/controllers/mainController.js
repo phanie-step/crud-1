@@ -8,7 +8,13 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const controller = {
 	index: (req, res) => {
-		res.render('index');
+		const visitados = products.filter((product)=>{
+			return product.category === 'visited';
+		});
+		const promociones = products.filter((product)=>{
+			return product.category === 'in-sale';
+		});
+		res.render('index', {visitados, promociones});
 	},
 	search: (req, res) => {
 		// Do the magic
