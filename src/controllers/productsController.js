@@ -16,6 +16,7 @@ const controller = {
   detail: (req, res) => {
     let productId = req.params.id;
     console.log(productId);
+    
     const product = products.find((producto) => {
       return producto.id == productId;
     });
@@ -59,7 +60,7 @@ const controller = {
       res.render("error");
     }
   },
-  
+
   // Update - Method to update
   update: (req, res) => {
     const productInfo = req.body;
@@ -67,7 +68,10 @@ const controller = {
       return producto.id == req.params.id;
     });
 
-    products[productIdex]={...products[productIdex], ...productInfo};
+    products[productIdex]={
+		...products[productIdex], 
+		...productInfo
+	};
 
     fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
     res.redirect("/");

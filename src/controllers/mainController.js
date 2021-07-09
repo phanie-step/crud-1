@@ -16,9 +16,14 @@ const controller = {
 		});
 		res.render('index', {visitados, promociones});
 	},
+
 	search: (req, res) => {
-		// Do the magic
-	},
+		const {keywords} = req.query;
+    	const resultados = products.filter(({description, name}) =>{
+      		 return description.includes(keywords) || name.includes(keywords);
+    	});
+		res.render('results', {resultados, keywords});
+	},	
 };
 
 module.exports = controller;
